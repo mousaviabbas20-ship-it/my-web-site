@@ -3,46 +3,76 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>نهم‌یار هوشمند</title>
+    <title>نهم‌یار - هوش مصنوعی پایه نهم</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&display=swap');
       body { font-family: 'Vazirmatn', sans-serif; background-color: #f3f4f6; margin: 0; }
+      .chat-box { height: 60vh; overflow-y: auto; }
     </style>
   </head>
   <body>
     <div id="root"></div>
 
     <script type="text/babel">
-      // تمام کدهای App.tsx را مستقیماً اینجا آوردیم
-      const { useState, useEffect } = React;
+      const { useState } = React;
 
       const App = () => {
+        const [messages, setMessages] = useState([
+          { role: 'ai', text: 'سلام! من نهم‌یار هستم. چه کمکی در درس‌های پایه نهم می‌تونم بهت بکنم؟' }
+        ]);
+        const [input, setInput] = useState('');
+
+        const handleSend = () => {
+          if (!input.trim()) return;
+          setMessages([...messages, { role: 'user', text: input }]);
+          setInput('');
+          
+          // شبیه‌سازی پاسخ هوش مصنوعی
+          setTimeout(() => {
+            setMessages(prev => [...prev, { role: 'ai', text: 'این یک نسخه آزمایشی است. برای اتصال به هوش مصنوعی واقعی گوگل، باید کلید API را تنظیم کنیم.' }]);
+          }, 1000);
+        };
+
         return (
-          <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-500 to-purple-600 text-white p-4 text-center">
-            <h1 className="text-4xl font-bold mb-4">به نهم‌یار خوش آمدید! 🚀</h1>
-            <p className="text-lg mb-8">سایت شما با موفقیت بالا آمد و در حال اجراست.</p>
-            <div className="bg-white text-gray-800 p-6 rounded-2xl shadow-2xl max-w-sm w-full">
-              <h2 className="text-xl font-bold mb-2">وضعیت سیستم: ✅ سبز</h2>
-              <p className="text-sm text-gray-600">حالا می‌توانید کدهای اصلی خود را بخش به بخش اضافه کنید.</p>
-              <button 
-                onClick={() => alert('هوش مصنوعی آماده است!')}
-                className="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
-              >
-                شروع گفتگو
-              </button>
+          <div className="min-h-screen bg-gray-100 p-4">
+            <header className="bg-blue-600 text-white p-4 rounded-t-2xl shadow-lg flex justify-between items-center">
+              <h1 className="text-xl font-bold">نهم‌یار هوشمند 🚀</h1>
+              <span className="text-sm bg-blue-500 px-2 py-1 rounded">آنلاین</span>
+            </header>
+
+            <div className="bg-white shadow-xl rounded-b-2xl p-4">
+              <div className="chat-box mb-4 space-y-4 p-2">
+                {messages.map((msg, index) => (
+                  <div key={index} className={`flex ${msg.role === 'user' ? 'justify-start' : 'justify-end'}`}>
+                    <div className={`max-w-[80%] p-3 rounded-2xl ${msg.role === 'user' ? 'bg-blue-100 text-blue-800' : 'bg-gray-200 text-gray-800'}`}>
+                      {msg.text}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex gap-2">
+                <input 
+                  type="text" 
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+                  placeholder="سوالت رو بپرس..."
+                  className="flex-1 border p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <button onClick={handleSend} className="bg-blue-600 text-white px-6 py-2 rounded-xl">ارسال</button>
+              </div>
             </div>
           </div>
         );
       };
 
-      // اجرای برنامه
       const root = ReactDOM.createRoot(document.getElementById('root'));
       root.render(<App />);
     </script>
-
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   </body>
 </html>
