@@ -4,12 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nohomyar - AI 9th Grade</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap');
-      body { font-family: 'Vazirmatn', sans-serif; background-color: #f3f4f6; margin: 0; }
-      #root { min-height: 100vh; }
-    </style>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
     <script type="importmap">
     {
       "imports": {
@@ -21,11 +19,22 @@
       }
     }
     </script>
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap');
+      body { font-family: 'Vazirmatn', sans-serif; background-color: #f3f4f6; margin: 0; }
+    </style>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module">
-      import "./App.tsx";
+
+    <script type="text/babel" data-type="module">
+      import React from 'react';
+      import { createRoot } from 'react-dom/client';
+      import App from './App.tsx';
+
+      const root = createRoot(document.getElementById('root'));
+      root.render(<App />);
     </script>
   </body>
 </html>
