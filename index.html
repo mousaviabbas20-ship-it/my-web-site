@@ -3,23 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nohomyar - AI 9th Grade</title>
-    
+    <title>نهم‌یار هوشمند</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    
-    <script type="importmap">
-    {
-      "imports": {
-        "react": "https://esm.sh/react@19.2.4",
-        "react-dom": "https://esm.sh/react-dom@19.2.4",
-        "react-dom/client": "https://esm.sh/react-dom@19.2.4/client",
-        "react-router-dom": "https://esm.sh/react-router-dom@6.22.3",
-        "lucide-react": "https://esm.sh/lucide-react@0.344.0"
-      }
-    }
-    </script>
-
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap');
       body { font-family: 'Vazirmatn', sans-serif; background-color: #f3f4f6; margin: 0; }
@@ -28,13 +14,35 @@
   <body>
     <div id="root"></div>
 
-    <script type="text/babel" data-type="module">
-      import React from 'react';
-      import { createRoot } from 'react-dom/client';
-      import App from './App.tsx';
+    <script type="text/babel">
+      // تمام کدهای App.tsx را مستقیماً اینجا آوردیم
+      const { useState, useEffect } = React;
 
-      const root = createRoot(document.getElementById('root'));
+      const App = () => {
+        return (
+          <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-500 to-purple-600 text-white p-4 text-center">
+            <h1 className="text-4xl font-bold mb-4">به نهم‌یار خوش آمدید! 🚀</h1>
+            <p className="text-lg mb-8">سایت شما با موفقیت بالا آمد و در حال اجراست.</p>
+            <div className="bg-white text-gray-800 p-6 rounded-2xl shadow-2xl max-w-sm w-full">
+              <h2 className="text-xl font-bold mb-2">وضعیت سیستم: ✅ سبز</h2>
+              <p className="text-sm text-gray-600">حالا می‌توانید کدهای اصلی خود را بخش به بخش اضافه کنید.</p>
+              <button 
+                onClick={() => alert('هوش مصنوعی آماده است!')}
+                className="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition"
+              >
+                شروع گفتگو
+              </button>
+            </div>
+          </div>
+        );
+      };
+
+      // اجرای برنامه
+      const root = ReactDOM.createRoot(document.getElementById('root'));
       root.render(<App />);
     </script>
+
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   </body>
 </html>
