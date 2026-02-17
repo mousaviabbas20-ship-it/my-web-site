@@ -1,103 +1,16 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>نهم‌یار | اپلیکیشن هوشمند</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap');
-        body { font-family: 'Vazirmatn', sans-serif; background-color: #f8fafc; overflow-x: hidden; }
-        .menu-card { transition: all 0.2s; cursor: pointer; }
-        .menu-card:active { transform: scale(0.96); }
-    </style>
-</head>
-<body class="max-w-md mx-auto min-h-screen flex flex-col bg-white shadow-2xl">
-
-    <div id="home-page" class="p-6 flex-1">
-        <header class="mt-8 mb-10 text-center">
-            <h1 class="text-3xl font-black text-gray-800">به نهم یار خوش آمدید👋</h1>
-            <p class="text-gray-400 text-sm mt-2 font-medium">همراه هوشمند شما در آزمون‌های نمونه دولتی و تیزهوشان</p>
-        </header>
-
-        <div class="space-y-4">
-            <div class="menu-card bg-white p-5 rounded-[2rem] shadow-sm border border-gray-100 flex items-center gap-4">
-                <div class="bg-indigo-500 w-14 h-14 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg">
-                    <i class="fa-solid fa-check-double"></i>
-                </div>
-                <div class="flex-1 text-right">
-                    <h3 class="font-bold text-gray-800">آزمون شبیه‌ساز</h3>
-                    <p class="text-gray-400 text-[10px]">سوالات سخت ماز و قلم‌چی با تحلیل تراز</p>
-                </div>
-            </div>
-
-            <div class="menu-card bg-white p-5 rounded-[2rem] shadow-sm border border-gray-100 flex items-center gap-4">
-                <div class="bg-emerald-500 w-14 h-14 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg">
-                    <i class="fa-solid fa-book-open"></i>
-                </div>
-                <div class="flex-1 text-right">
-                    <h3 class="font-bold text-gray-800">درسنامه هوشمند</h3>
-                    <p class="text-gray-400 text-[10px]">خلاصه دروس، نکات کلیدی و فرمول‌ها</p>
-                </div>
-            </div>
-
-            <div class="menu-card bg-white p-5 rounded-[2rem] shadow-sm border border-gray-100 flex items-center gap-4">
-                <div class="bg-purple-500 w-14 h-14 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg">
-                    <i class="fa-solid fa-camera"></i>
-                </div>
-                <div class="flex-1 text-right">
-                    <h3 class="font-bold text-gray-800">حل سوال با عکس</h3>
-                    <p class="text-gray-400 text-[10px]">تحلیل سوالات درسی با هوش مصنوعی</p>
-                </div>
-            </div>
-
-            <div onclick="showChat()" class="menu-card bg-white p-5 rounded-[2rem] shadow-sm border border-gray-100 flex items-center gap-4">
-                <div class="bg-pink-500 w-14 h-14 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg">
-                    <i class="fa-solid fa-comment-dots"></i>
-                </div>
-                <div class="flex-1 text-right">
-                    <h3 class="font-bold text-gray-800">مشاور همراه</h3>
-                    <p class="text-gray-400 text-[10px]">پرسش و پاسخ نامحدود درسی</p>
-                </div>
-            </div>
-        </div>
+<div onclick="openChat()" class="menu-card bg-white p-5 rounded-[2rem] shadow-sm border border-gray-100 flex items-center gap-4 cursor-pointer active:scale-95 transition-all">
+    <div class="bg-pink-500 w-14 h-14 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg">
+        <i class="fa-solid fa-comment-dots"></i>
     </div>
-
-    <div id="chat-page" class="hidden fixed inset-0 bg-white flex flex-col z-50">
-        <div class="bg-pink-500 p-5 text-white flex items-center gap-4 shadow-lg">
-            <button onclick="hideChat()" class="text-xl"><i class="fa-solid fa-arrow-right"></i></button>
-            <span class="font-bold">مشاور هوشمند نهم‌یار</span>
-        </div>
-        <div id="chat-box" class="flex-1 p-5 overflow-y-auto bg-gray-50 space-y-4">
-            <div class="bg-white p-4 rounded-2xl shadow-sm border text-sm inline-block">سلام! من آماده‌ام تا به سوالات درسی‌ات جواب بدم.</div>
-        </div>
-        <div class="p-4 border-t flex gap-2 bg-white">
-            <input id="user-input" class="flex-1 bg-gray-100 rounded-full px-5 py-3 outline-none text-sm" placeholder="سوالت رو اینجا بنویس...">
-            <button onclick="sendMessage()" class="bg-pink-500 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center">
-                <i class="fa-solid fa-paper-plane"></i>
-            </button>
-        </div>
+    <div class="flex-1 text-right">
+        <h3 class="font-bold text-gray-800">مشاور همراه</h3>
+        <p class="text-gray-400 text-[10px]">پرسش و پاسخ نامحدود درسی</p>
     </div>
+</div>
 
-    <script>
-        function showChat() { document.getElementById('chat-page').classList.remove('hidden'); }
-        function hideChat() { document.getElementById('chat-page').classList.add('hidden'); }
-        
-        function sendMessage() {
-            const input = document.getElementById('user-input');
-            const box = document.getElementById('chat-box');
-            if(!input.value.trim()) return;
-            
-            box.innerHTML += `<div class="text-left"><div class="bg-pink-100 p-3 rounded-2xl text-sm inline-block ml-auto text-pink-900">${input.value}</div></div>`;
-            input.value = '';
-            
-            // شبیه‌سازی پاسخ هوشمند
-            setTimeout(() => {
-                box.innerHTML += `<div class="bg-white p-4 rounded-2xl shadow-sm border text-sm">در حال پردازش سوال شما با هوش مصنوعی گوگل...</div>`;
-                box.scrollTop = box.scrollHeight;
-            }, 500);
-        }
-    </script>
-</body>
-</html>
+<script>
+    function openChat() {
+        // این کد باعث میشه صفحه چت باز بشه
+        document.getElementById('chat-page').style.display = 'flex';
+    }
+</script>
