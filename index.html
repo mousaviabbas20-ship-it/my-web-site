@@ -2,41 +2,70 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>تست نهایی نهم‌یار</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نهم‌یار هوشمند | دستیار تخصصی</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
+        body { font-family: 'Vazirmatn', sans-serif; background: #eff6ff; }
+    </style>
 </head>
-<body class="bg-gray-100 font-[Vazirmatn]">
+<body>
     <div id="root"></div>
     <script type="text/babel">
-        const { useState } = React;
+        const { useState, useEffect, useRef } = React;
         function App() {
-            const [status, setStatus] = useState('آماده برای تست...');
-            const testConnection = async () => {
-                setStatus('در حال بررسی اتصال به گوگل...');
+            const [input, setInput] = useState('');
+            const [messages, setMessages] = useState([{ role: 'ai', text: 'سلام! نهم‌یار آماده‌ست. هر سوال درسی داری بپرس.' }]);
+            const [loading, setLoading] = useState(false);
+            const scrollRef = useRef(null);
+
+            useEffect(() => { scrollRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages]);
+
+            const askGemini = async () => {
+                if (!input.trim() || loading) return;
+                const userText = input;
+                setMessages(prev => [...prev, { role: 'user', text: userText }]);
+                setInput('');
+                setLoading(true);
+
                 try {
-                    const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyDc1_GonxxCLJCOurVnqJbfWzVwNeX9cqU", {
+                    // اصلاح آدرس API بر اساس متد جدید
+                    const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyDc1_GonxxCLJCOurVnqJbfWzVwNeX9cqU", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ contents: [{ parts: [{ text: "سلام" }] }] })
+                        body: JSON.stringify({
+                            contents: [{ parts: [{ text: "تو دستیار هوشمند دانش‌آموزان نهم هستی. پاسخ کوتاه و صمیمی بده: " + userText }] }]
+                        })
                     });
-                    const data = await res.json();
-                    if (data.candidates) {
-                        setStatus('✅ ایول! اتصال برقرار شد. جواب گوگل: ' + data.candidates[0].content.parts[0].text);
-                    } else {
-                        setStatus('❌ گوگل متصل شد اما جواب نداد. کد خطا: ' + JSON.stringify(data.error));
-                    }
+                    const data = await response.json();
+                    const aiText = data.candidates[0].content.parts[0].text;
+                    setMessages(prev => [...prev, { role: 'ai', text: aiText }]);
                 } catch (e) {
-                    setStatus('❌ خطای شبکه! یا فیلترشکن ضعیفه یا آی‌پی شما بلاک شده.');
+                    setMessages(prev => [...prev, { role: 'ai', text: 'خطا در ارتباط! فیلترشکن رو چک کن.' }]);
+                } finally {
+                    setLoading(false);
                 }
             };
+
             return (
-                <div className="p-10 text-center">
-                    <h1 className="text-2xl mb-5 font-bold">عیب‌یاب هوشمند نهم‌یار</h1>
-                    <div className="p-5 bg-white rounded-xl shadow mb-5">{status}</div>
-                    <button onClick={testConnection} className="bg-blue-600 text-white px-8 py-3 rounded-lg">تست اتصال</button>
+                <div className="max-w-md mx-auto h-screen flex flex-col p-4">
+                    <div className="bg-blue-600 text-white p-4 rounded-t-2xl font-bold text-center shadow-lg">🚀 نهم‌یار هوشمند</div>
+                    <div className="flex-1 bg-white p-4 overflow-y-auto border-x space-y-4 shadow-inner">
+                        {messages.map((m, i) => (
+                            <div key={i} className={`p-4 rounded-2xl shadow-sm max-w-[85%] ${m.role === 'user' ? 'bg-blue-500 text-white ml-auto rounded-tr-none' : 'bg-gray-100 text-gray-800 mr-auto rounded-tl-none border'}`}>
+                                {m.text}
+                            </div>
+                        ))}
+                        <div ref={scrollRef} />
+                    </div>
+                    <div className="flex gap-2 p-3 bg-white border-t rounded-b-2xl shadow-lg">
+                        <input value={input} onChange={e => setInput(e.target.value)} onKeyPress={e => e.key === 'Enter' && askGemini()} className="flex-1 border p-2 rounded-xl outline-none focus:ring-2 focus:ring-blue-400" placeholder="سوالت رو بپرس..." />
+                        <button onClick={askGemini} className="bg-blue-600 text-white px-4 py-2 rounded-xl">ارسال</button>
+                    </div>
                 </div>
             );
         }
