@@ -1,16 +1,42 @@
-<div onclick="openChat()" class="menu-card bg-white p-5 rounded-[2rem] shadow-sm border border-gray-100 flex items-center gap-4 cursor-pointer active:scale-95 transition-all">
-    <div class="bg-pink-500 w-14 h-14 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg">
-        <i class="fa-solid fa-comment-dots"></i>
-    </div>
-    <div class="flex-1 text-right">
-        <h3 class="font-bold text-gray-800">مشاور همراه</h3>
-        <p class="text-gray-400 text-[10px]">پرسش و پاسخ نامحدود درسی</p>
-    </div>
-</div>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نهم‌یار هوشمند</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
+        body { font-family: 'Vazirmatn', sans-serif; background-color: #f9fafb; }
+        .page { display: none; }
+        .active-page { display: block; }
+    </style>
+</head>
+<body>
 
-<script>
-    function openChat() {
-        // این کد باعث میشه صفحه چت باز بشه
-        document.getElementById('chat-page').style.display = 'flex';
-    }
-</script>
+    <div id="home" class="page active-page p-6 max-w-md mx-auto">
+        <header class="text-center my-10">
+            <h1 class="text-3xl font-black text-gray-800">به نهم یار خوش آمدید👋</h1>
+            <p class="text-gray-500 text-sm mt-2">همراه هوشمند شما در آزمون‌ها</p>
+        </header>
+
+        <div class="space-y-4">
+            <div onclick="showPage('chat')" class="bg-white p-5 rounded-[2rem] shadow-md flex items-center gap-4 cursor-pointer active:scale-95 transition-all border border-gray-100">
+                <div class="bg-pink-500 w-14 h-14 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg">
+                    <i class="fa-solid fa-comment-dots"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-bold text-gray-800">مشاور همراه</h3>
+                    <p class="text-gray-400 text-xs">پرسش و پاسخ نامحدود درسی</p>
+                </div>
+            </div>
+            </div>
+    </div>
+
+    <div id="chat" class="page fixed inset-0 bg-white flex flex-col">
+        <div class="bg-pink-500 p-4 text-white flex items-center gap-3">
+            <button onclick="showPage('home')"><i class="fa-solid fa-arrow-right"></i></button>
+            <span class="font-bold">مشاور هوشمند</span>
+        </div>
+        
