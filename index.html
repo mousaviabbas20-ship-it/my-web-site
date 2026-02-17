@@ -3,117 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>نهم یار هوشمند</title>
+    <title>نهم یار | نسخه نهایی</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap');
-        body { font-family: 'Vazirmatn', sans-serif; background: #fcfcfc; }
-        .menu-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; border: 1px solid #eee; }
-        .menu-card:active { transform: scale(0.95); background-color: #f8f9fa; }
-        .hidden-page { display: none; }
+        body { font-family: 'Vazirmatn', sans-serif; background-color: #ffffff; }
+        .page { display: none; }
+        .active-page { display: block; }
+        .menu-card { transition: all 0.2s; border: 1px solid #f0f0f0; border-radius: 2rem; padding: 1.25rem; display: flex; align-items: center; gap: 1rem; cursor: pointer; margin-bottom: 1rem; }
+        .menu-card:active { transform: scale(0.95); background-color: #f9f9f9; }
     </style>
 </head>
-<body class="max-w-md mx-auto min-h-screen bg-white shadow-xl">
+<body class="max-w-md mx-auto min-h-screen relative">
 
-    <div id="home-page" class="p-6">
-        <header class="text-center mt-8 mb-12">
+    <div id="home" class="page active-page p-6">
+        <header class="text-center mt-6 mb-10">
             <h1 class="text-3xl font-black text-gray-800">به نهم یار خوش آمدید👋</h1>
-            <p class="text-gray-400 text-xs mt-2 font-medium">همراه هوشمند شما در آزمون‌های نمونه دولتی و تیزهوشان</p>
+            <p class="text-gray-400 text-xs mt-2 font-bold leading-6">همراه هوشمند شما در آزمون‌های نمونه دولتی و تیزهوشان</p>
         </header>
 
-        <div class="space-y-5">
-            <div onclick="alert('بخش آزمون به زودی فعال می‌شود')" class="menu-card bg-white p-5 rounded-[2.5rem] flex items-center gap-4">
-                <div class="bg-indigo-500 w-14 h-14 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg shadow-indigo-200">
-                    <i class="fa-solid fa-check-double"></i>
-                </div>
+        <div class="space-y-2">
+            <div class="menu-card">
                 <div class="flex-1 text-right">
-                    <h3 class="font-bold text-gray-800">آزمون شبیه‌ساز</h3>
+                    <h3 class="font-bold text-gray-800 text-sm">آزمون شبیه‌ساز</h3>
                     <p class="text-gray-400 text-[10px]">سوالات سخت ماز و قلم‌چی با تحلیل تراز</p>
                 </div>
+                <div class="bg-[#6366f1] w-12 h-12 rounded-2xl flex items-center justify-center text-white text-xl shadow-lg shadow-indigo-100">
+                    <i class="fa-solid fa-check-double"></i>
+                </div>
             </div>
 
-            <div onclick="alert('درسنامه‌ها در حال بارگذاری هستند')" class="menu-card bg-white p-5 rounded-[2.5rem] flex items-center gap-4">
-                <div class="bg-emerald-500 w-14 h-14 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg shadow-emerald-200">
-                    <i class="fa-solid fa-book-open"></i>
-                </div>
+            <div class="menu-card">
                 <div class="flex-1 text-right">
-                    <h3 class="font-bold text-gray-800">درسنامه هوشمند</h3>
+                    <h3 class="font-bold text-gray-800 text-sm">درسنامه هوشمند</h3>
                     <p class="text-gray-400 text-[10px]">خلاصه دروس، نکات کلیدی و فرمول‌ها</p>
                 </div>
+                <div class="bg-[#10b981] w-12 h-12 rounded-2xl flex items-center justify-center text-white text-xl shadow-lg shadow-emerald-100">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
             </div>
 
-            <div onclick="alert('دسترسی به دوربین در نسخه APK فعال می‌شود')" class="menu-card bg-white p-5 rounded-[2.5rem] flex items-center gap-4">
-                <div class="bg-purple-500 w-14 h-14 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg shadow-purple-200">
-                    <i class="fa-solid fa-camera"></i>
-                </div>
+            <div class="menu-card">
                 <div class="flex-1 text-right">
-                    <h3 class="font-bold text-gray-800">حل سوال با عکس</h3>
+                    <h3 class="font-bold text-gray-800 text-sm">حل سوال با عکس</h3>
                     <p class="text-gray-400 text-[10px]">تحلیل سوالات درسی با هوش مصنوعی</p>
                 </div>
+                <div class="bg-[#a855f7] w-12 h-12 rounded-2xl flex items-center justify-center text-white text-xl shadow-lg shadow-purple-100">
+                    <i class="fa-solid fa-camera"></i>
+                </div>
             </div>
 
-            <div onclick="togglePage('chat-page')" class="menu-card bg-white p-5 rounded-[2.5rem] flex items-center gap-4 border-pink-100 bg-pink-50/20">
-                <div class="bg-pink-500 w-14 h-14 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg shadow-pink-200">
-                    <i class="fa-solid fa-comment-dots"></i>
-                </div>
+            <div onclick="showChat()" class="menu-card">
                 <div class="flex-1 text-right">
-                    <h3 class="font-bold text-gray-800">مشاور همراه</h3>
+                    <h3 class="font-bold text-gray-800 text-sm">مشاور همراه</h3>
                     <p class="text-gray-400 text-[10px]">پرسش و پاسخ نامحدود درسی</p>
+                </div>
+                <div class="bg-[#ec4899] w-12 h-12 rounded-2xl flex items-center justify-center text-white text-xl shadow-lg shadow-pink-100">
+                    <i class="fa-solid fa-comment-dots"></i>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="chat-page" class="hidden-page fixed inset-0 bg-white flex flex-col z-50">
-        <header class="bg-pink-500 p-5 text-white flex items-center justify-between shadow-lg">
-            <div class="flex items-center gap-3">
-                <button onclick="togglePage('home-page')" class="text-xl px-2"><i class="fa-solid fa-arrow-right"></i></button>
-                <span class="font-bold text-lg">مشاور هوشمند نهم‌یار</span>
-            </div>
-            <i class="fa-solid fa-robot text-2xl opacity-50"></i>
-        </header>
-
+    <div id="chat-page" class="page fixed inset-0 bg-white flex flex-col z-50">
+        <div class="bg-[#ec4899] p-4 text-white flex items-center justify-between shadow-lg">
+            <button onclick="showHome()" class="text-lg"><i class="fa-solid fa-arrow-right"></i></button>
+            <span class="font-bold text-sm">مشاور هوشمند نهم یار</span>
+            <div class="w-5"></div>
+        </div>
         <div id="chat-box" class="flex-1 p-5 overflow-y-auto bg-gray-50 space-y-4">
-            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-sm max-w-[85%] leading-relaxed text-gray-700">
-                سلام قهرمان! نهم‌یار آماده‌ست تا به تمام سوالاتت درباره تیزهوشان و درس‌ها جواب بده. چی بپرسیم؟
+            <div class="bg-white p-3 rounded-2xl rounded-tr-none shadow-sm border border-gray-100 text-xs leading-6 inline-block max-w-[80%]">
+                سلام! نهم‌یار آماده‌ست. سوال درسی‌ت رو بپرس تا با مدل جدید جواب بدم.
             </div>
         </div>
-
         <div class="p-4 bg-white border-t flex gap-2">
-            <input id="user-input" type="text" class="flex-1 bg-gray-100 rounded-2xl px-5 py-3 outline-none text-sm" placeholder="سوالت رو اینجا بنویس...">
-            <button onclick="sendMessage()" class="bg-pink-500 text-white w-12 h-12 rounded-2xl shadow-lg shadow-pink-200 flex items-center justify-center active:scale-90 transition-all">
-                <i class="fa-solid fa-paper-plane"></i>
+            <input id="user-input" type="text" class="flex-1 bg-gray-100 rounded-2xl px-4 py-3 text-xs outline-none focus:ring-1 ring-pink-500" placeholder="سوالت رو بپرس...">
+            <button onclick="sendMessage()" class="bg-[#6366f1] text-white w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-100">
+                <i class="fa-solid fa-paper-plane text-sm"></i>
             </button>
         </div>
     </div>
 
     <script>
-        function togglePage(pageId) {
-            document.getElementById('home-page').classList.add('hidden-page');
-            document.getElementById('chat-page').classList.add('hidden-page');
-            document.getElementById(pageId).classList.remove('hidden-page');
+        function showChat() {
+            document.getElementById('home').classList.remove('active-page');
+            document.getElementById('chat-page').classList.add('active-page');
         }
-
+        function showHome() {
+            document.getElementById('chat-page').classList.remove('active-page');
+            document.getElementById('home').classList.add('active-page');
+        }
         function sendMessage() {
             const input = document.getElementById('user-input');
             const box = document.getElementById('chat-box');
             if(!input.value.trim()) return;
 
             // پیام کاربر
-            box.innerHTML += `<div class="flex justify-start"><div class="bg-indigo-600 text-white p-4 rounded-2xl shadow-md text-sm max-w-[85%]">${input.value}</div></div>`;
-            const userMsg = input.value;
+            box.innerHTML += `<div class="flex justify-end"><div class="bg-[#6366f1] text-white p-3 rounded-2xl rounded-tl-none text-xs leading-6 max-w-[80%]">${input.value}</div></div>`;
+            
+            const userText = input.value;
             input.value = '';
             box.scrollTop = box.scrollHeight;
 
-            // شبیه‌سازی پاسخ هوشمند (اینجا باید کلید API خودت رو وصل کنی)
+            // پاسخ هوش مصنوعی (شبیه‌ساز)
             setTimeout(() => {
-                box.innerHTML += `<div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 text-sm max-w-[85%] text-gray-700">
-                    <i class="fa-solid fa-spinner fa-spin ml-2"></i> در حال تحلیل سوال شما...
-                </div>`;
+                box.innerHTML += `<div class="bg-white p-3 rounded-2xl rounded-tr-none shadow-sm border border-gray-100 text-xs leading-6 inline-block max-w-[80%]">در حال بررسی سوال شما... (در نسخه APK به هوش مصنوعی وصل می‌شود)</div>`;
                 box.scrollTop = box.scrollHeight;
             }, 500);
         }
     </script>
 </body>
 </html>
+
