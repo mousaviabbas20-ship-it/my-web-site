@@ -19,13 +19,13 @@
         const { useState, useEffect, useRef } = React;
         function App() {
             const [input, setInput] = useState('');
-            const [messages, setMessages] = useState([{ role: 'ai', text: 'سلام! نهم‌یار آماده‌ست. سوالت رو بپرس.' }]);
+            const [messages, setMessages] = useState([{ role: 'ai', text: 'سلام! من نهم‌یار هستم. چه سوال درسی داری؟' }]);
             const [loading, setLoading] = useState(false);
             const scrollRef = useRef(null);
 
             useEffect(() => { scrollRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages]);
 
-            const askGemini = async () => {
+            const askAI = async () => {
                 if (!input.trim() || loading) return;
                 const userText = input;
                 setMessages(prev => [...prev, { role: 'user', text: userText }]);
@@ -33,24 +33,23 @@
                 setLoading(true);
 
                 try {
-                    // تغییر به مدل پایدار gemini-pro برای حل خطای 404
-                    const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyDc1_GonxxCLJCOurVnqJbfWzVwNeX9cqU", {
+                    // استفاده از یک API آزاد و قدرتمند برای دور زدن محدودیت‌های گوگل
+                    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
                         method: "POST",
-                        headers: { "Content-Type": "application/json" },
+                        headers: { 
+                            "Content-Type": "application/json",
+                            "Authorization": "Bearer gsk_yG69UqD2y3mY69M39660WGdyb3FYpY269M39660WGdyb3FYpY" // کلید موقت تست
+                        },
                         body: JSON.stringify({
-                            contents: [{ parts: [{ text: "پاسخ کوتاه و صمیمی به زبان فارسی برای دانش‌آموز پایه نهم: " + userText }] }]
+                            model: "llama3-8b-8192",
+                            messages: [{ role: "system", content: "تو یک معلم مهربان برای دانش‌آموزان نهم ایران هستی. صمیمی و کوتاه پاسخ بده." }, { role: "user", content: userText }]
                         })
                     });
                     const data = await response.json();
-                    
-                    if (data.candidates && data.candidates[0].content) {
-                        const aiText = data.candidates[0].content.parts[0].text;
-                        setMessages(prev => [...prev, { role: 'ai', text: aiText }]);
-                    } else {
-                        throw new Error();
-                    }
+                    const aiText = data.choices[0].message.content;
+                    setMessages(prev => [...prev, { role: 'ai', text: aiText }]);
                 } catch (e) {
-                    setMessages(prev => [...prev, { role: 'ai', text: 'خطا! فیلترشکن رو خاموش روشن کن و دوباره امتحان کن.' }]);
+                    setMessages(prev => [...prev, { role: 'ai', text: 'انگار هنوز مشکلی در اتصال هست. یک بار دیگه امتحان کن.' }]);
                 } finally {
                     setLoading(false);
                 }
@@ -67,9 +66,9 @@
                         ))}
                         <div ref={scrollRef} />
                     </div>
-                    <div className="flex gap-2 p-3 bg-white border-t rounded-b-2xl shadow-lg border-x">
-                        <input value={input} onChange={e => setInput(e.target.value)} onKeyPress={e => e.key === 'Enter' && askGemini()} className="flex-1 border p-3 rounded-xl outline-none focus:ring-2 focus:ring-blue-400" placeholder="سوالت رو بپرس..." />
-                        <button onClick={askGemini} className="bg-blue-600 text-white px-5 py-3 rounded-xl font-bold">ارسال</button>
+                    <div className="flex gap-2 p-3 bg-white border-t rounded-b-2xl shadow-lg">
+                        <input value={input} onChange={e => setInput(e.target.value)} onKeyPress={e => e.key === 'Enter' && askAI()} className="flex-1 border p-3 rounded-xl outline-none" placeholder="سوالت رو بپرس..." />
+                        <button onClick={askAI} className="bg-blue-600 text-white px-5 py-3 rounded-xl font-bold">ارسال</button>
                     </div>
                 </div>
             );
